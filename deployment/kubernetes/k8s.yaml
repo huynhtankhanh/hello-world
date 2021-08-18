@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world-deploy-htk
+  namespace: khanh
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-world-deploy-htk
+  template:
+    metadata:
+      labels:
+        app: hello-world-deploy-htk
+    spec:
+      containers:
+      - name: hello-world-deployment-htk
+        image: eu.gcr.io/klara-practice/hello_world_htk
+        ports:
+        - containerPort: 8080
+          name: http
+        - containerPort: 9990
+          name: http-admin
+        resources:
+          requests:
+            memory: "256Mi"
+          limits:
+            memory: "256Mi"
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: hello-world-deploy-htk
+  namespace: khanh
+spec:
+  selector:
+    app: hello-world-deploy-htk
+  ports:
+  - protocol: TCP
+    targetPort: 8080
+    port: 8080
+    name: http
+  - protocol: TCP
+    targetPort: 9990
+    port: 9990
+    name: http-admin
+  type: LoadBalancer
+  
