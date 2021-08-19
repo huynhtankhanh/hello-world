@@ -193,7 +193,7 @@ public class Solution {
 
 		return reversedX == x;
 	}
-	
+
 	public static void main(String[] args) {
 		Solution solution = new Solution();
 
@@ -253,8 +253,8 @@ public class Solution {
 		// 7
 		System.out.println("7. Reverse Integer");
 		System.out.println(solution.reverse(1534236469));
-		
-		//9 
+
+		// 9
 		System.out.println("9. Palindrome Number");
 		System.out.println(solution.isPalindrome(131));
 	}

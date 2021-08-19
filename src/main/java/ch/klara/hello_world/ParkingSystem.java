@@ -4,14 +4,14 @@ public class ParkingSystem {
 	private int big;
 	private int medium;
 	private int small;
-	
-    public ParkingSystem(int big, int medium, int small) {
-        this.big = big;
-        this.medium = medium;
-        this.small = small;
-    }
-    
-    // big 1, medium 2, small 3
+
+	public ParkingSystem(int big, int medium, int small) {
+		this.big = big;
+		this.medium = medium;
+		this.small = small;
+	}
+
+	// big 1, medium 2, small 3
 	public boolean addCar(int carType) {
 		switch (carType) {
 		case 1:
