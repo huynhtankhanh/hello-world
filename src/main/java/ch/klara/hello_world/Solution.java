@@ -190,8 +190,46 @@ public class Solution {
 			}
 			copy /= 10;
 		}
-
 		return reversedX == x;
+	}
+
+	public int romanToInt(String s) {
+		int prev = lookRomanInt(s.charAt(s.length() - 1));
+		int sum = 0;
+		sum += prev;
+		for (int i = s.length() - 2; i >= 0; i--) {
+			int curr = 0;
+			char val = s.charAt(i);
+			curr = lookRomanInt(val);
+			if (curr >= prev) {
+				sum += curr;
+			} else {
+				sum -= curr;
+			}
+			prev = curr;
+		}
+		return sum;
+	}
+
+	public int lookRomanInt(char c) {
+		switch (c) {
+		case 'I':
+			return 1;
+		case 'V':
+			return 5;
+		case 'X':
+			return 10;
+		case 'L':
+			return 50;
+		case 'C':
+			return 100;
+		case 'D':
+			return 500;
+		case 'M':
+			return 1000;
+		default:
+			return 0;
+		}
 	}
 
 	public static void main(String[] args) {
@@ -257,6 +295,11 @@ public class Solution {
 		// 9
 		System.out.println("9. Palindrome Number");
 		System.out.println(solution.isPalindrome(131));
+
+		// 13
+		System.out.println("13. Roman to Integer");
+		System.out.println(solution.romanToInt("LVIII"));
+		System.out.println(solution.romanToInt("LIV"));
 	}
 
 }
