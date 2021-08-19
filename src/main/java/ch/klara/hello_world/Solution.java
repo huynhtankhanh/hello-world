@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Stack;
 import java.util.stream.Collectors;
 
 public class Solution {
@@ -232,6 +233,76 @@ public class Solution {
 		}
 	}
 
+	public String longestCommonPrefix(String[] strs) {
+		if (strs.length == 0) {
+			return "";
+		}
+		String shortestStr = strs[0];
+		int skip = 0;
+		for (int i = 1; i < strs.length; i++) {
+			if ("".equals(strs[i].trim())) {
+				return "";
+			}
+			if (strs[i].length() < shortestStr.length()) {
+				shortestStr = strs[i];
+				skip = i;
+			}
+		}
+
+		String result = "";
+		for (int i = 0; i < shortestStr.length(); i++) {
+			String prefix = shortestStr.substring(0, i + 1); // substring get from 0 to endIndex - 1
+			result = prefix;
+			for (int j = 0; j < strs.length; j++) {
+				if (j == skip) {
+					continue;
+				}
+				String str = strs[j];
+				if (!str.startsWith(prefix)) {
+					result = shortestStr.substring(0, i);
+					return result;
+				}
+			}
+		}
+		return result;
+	}
+
+	public String longestCommonPrefix2(String[] strs) {
+		if (strs.length == 0) {
+			return "";
+		}
+		String prefix = strs[0];
+		for (int i = 1; i < strs.length; i++) {
+			String str = strs[i];
+			while (str.indexOf(prefix) != 0) {
+				prefix = prefix.substring(0, prefix.length() - 1);
+				if (prefix.isEmpty()) {
+					return "";
+				}
+			}
+		}
+		return prefix;
+	}
+
+	boolean valid(char b, char e) {
+		return b == '(' && e == ')' || b == '{' && e == '}' || b == '[' && e == ']';
+	}
+
+	public boolean isValid(String s) {
+		Stack<Character> stack = new Stack<>();
+		for (Character c : s.toCharArray()) {
+			if (stack.isEmpty()) {
+				stack.push(c);
+			} else if (valid(stack.peek(), c)) {
+				stack.pop();
+			} else {
+				stack.push(c);
+			}
+		}
+
+		return stack.isEmpty();
+	}
+
 	public static void main(String[] args) {
 		Solution solution = new Solution();
 
@@ -284,13 +355,13 @@ public class Solution {
 
 		// 1832
 		System.out.println("1832. Check if the Sentence Is Pangram");
-		System.out.println("leetcode? " + solution.checkIfPangram("leetcode"));
-		System.out.println("thequickbrownfoxjumpsoverthelazydog? "
+		System.out.println("leetcode ? " + solution.checkIfPangram("leetcode"));
+		System.out.println("thequickbrownfoxjumpsoverthelazydog ? "
 				+ solution.checkIfPangram("thequickbrownfoxjumpsoverthelazydog"));
 
 		// 7
 		System.out.println("7. Reverse Integer");
-		System.out.println(solution.reverse(1534236469));
+		System.out.println(solution.reverse(134236469));
 
 		// 9
 		System.out.println("9. Palindrome Number");
@@ -300,6 +371,18 @@ public class Solution {
 		System.out.println("13. Roman to Integer");
 		System.out.println(solution.romanToInt("LVIII"));
 		System.out.println(solution.romanToInt("LIV"));
+
+		// 14
+		System.out.println("14. Longest Common Prefix");
+		System.out.println("c1_a: " + solution.longestCommonPrefix(new String[] { "flower", "flow", "flight" }));
+		System.out.println("c1_b: " + solution.longestCommonPrefix(new String[] { "a" }));
+		System.out.println("c2_1: " + solution.longestCommonPrefix2(new String[] { "flower", "flow", "flight" }));
+		System.out.println("c2_b: " + solution.longestCommonPrefix2(new String[] { "a" }));
+
+		// 20
+		System.out.println("20. Valid Parentheses");
+		System.out.println(solution.isValid("([])"));
+		System.out.println(solution.isValid("(]"));
 	}
 
 }
