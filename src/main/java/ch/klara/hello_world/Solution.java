@@ -3,22 +3,25 @@ package ch.klara.hello_world;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Solution {
-    public List<Integer> preorderTraversal(TreeNode root) {
-        List<Integer> result = new ArrayList<>();
-        if(root == null) {
-             return result;
-        }
-        result.add(root.val);
-        result.addAll(preorderTraversal(root.left));
-        result.addAll(preorderTraversal(root.right));
+	public List<Integer> preorderTraversal(TreeNode root) {
+		List<Integer> result = new ArrayList<>();
+		if (root == null) {
+			return result;
+		}
+		result.add(root.val);
+		result.addAll(preorderTraversal(root.left));
+		result.addAll(preorderTraversal(root.right));
 
-        return result;
-    }
-	
+		return result;
+	}
+
 	public int[] twoSum(int[] nums, int target) {
 		Map<Integer, Integer> map = new HashMap<>();
 		for (int i = 0; i < nums.length; i++) {
@@ -91,7 +94,7 @@ public class Solution {
 		}
 		return result;
 	}
-	
+
 	public int[] runningSum(int[] nums) {
 		int[] result = new int[nums.length];
 		for (int i = 0; i < result.length; i++) {
@@ -103,6 +106,92 @@ public class Solution {
 		}
 
 		return result;
+	}
+
+	public int maximumWealth(int[][] accounts) {
+		Map<Integer, Integer> map = new HashMap<>();
+		for (int i = 0; i < accounts.length; i++) {
+			map.put(i, sum1762(accounts[i]));
+		}
+
+		int result = 0;
+		for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+			if (entry.getValue() > result) {
+				result = entry.getValue();
+			}
+		}
+
+		return result;
+	}
+
+	public int sum1762(int[] nums) {
+		int result = 0;
+		for (int i = 0; i < nums.length; i++) {
+			result += nums[i];
+		}
+		return result;
+	}
+
+	// index 1 type, 2 color, 3 name
+	public int countMatches(List<List<String>> items, String ruleKey, String ruleValue) {
+		return items.stream().filter(item -> {
+			if ("type".equals(ruleKey)) {
+				return item.get(0).equals(ruleValue);
+			} else if ("color".equals(ruleKey)) {
+				return item.get(1).equals(ruleValue);
+			}
+			return item.get(2).equals(ruleValue);
+		}).collect(Collectors.toList()).size();
+	}
+
+	public boolean checkIfPangram(String sentence) {
+		Set<String> pangramSet = new HashSet<>();
+		for (int i = 0; i < sentence.length(); i++) {
+			String str = String.valueOf(sentence.charAt(i));
+			pangramSet.add(str);
+		}
+
+		return pangramSet.size() == 26 ? true : false;
+	}
+
+	public int reverse(int x) {
+		if (x < Integer.MIN_VALUE || x > Integer.MAX_VALUE) {
+			return 0;
+		}
+		int result = 0;
+		while (x != 0) {
+			int digit = x % 10;
+			if (result < (Integer.MIN_VALUE / 10) || result > (Integer.MAX_VALUE / 10)) {
+				result = 0;
+			} else {
+				result = result * 10 + digit;
+			}
+			x /= 10;
+		}
+		return result;
+	}
+
+	public boolean isOutOfIntegerBoundary(int x) {
+		return x < Integer.MIN_VALUE || x > Integer.MAX_VALUE;
+	}
+
+	public boolean isPalindrome(int x) {
+		if (x < 0 || x > Integer.MAX_VALUE) {
+			return false;
+		}
+		int reversedX = 0;
+		int copy = x;
+		while (copy != 0) {
+			int digit = copy % 10;
+			if (reversedX < (Integer.MIN_VALUE / 10) || reversedX > (Integer.MAX_VALUE / 10)) {
+				reversedX = 0;
+			} else {
+				reversedX = reversedX * 10 + digit;
+			}
+			copy /= 10;
+		}
+
+		return reversedX == x;
 	}
 	
 	public static void main(String[] args) {
@@ -134,10 +223,40 @@ public class Solution {
 		// 1470
 		System.out.println("1470. Shuffle the Array");
 		System.out.println(solution.shuffle(new int[] { 2, 5, 1, 3, 4, 7 }, 3));
-		
-		//1480
+
+		// 1480
 		System.out.println("1480. Running Sum of 1d Array");
-		System.out.println(solution.runningSum(new int[] { 1, 2, 3, 4}));
+		System.out.println(solution.runningSum(new int[] { 1, 2, 3, 4 }));
+
+		// 1603
+		System.out.println("1603. Design Parking System");
+		// ==> refer to ParkingSystem.java
+
+		// 1672
+		System.out.println("1672. Richest Customer Wealth");
+		int[][] accounts = new int[][] { { 1, 2, 3 }, { 3, 2, 1 } };
+		System.out.println(solution.maximumWealth(accounts));
+
+		// 1773
+		System.out.println("1773. Count Items Matching a Rule");
+		List<String> item1 = new ArrayList<>(Arrays.asList("phone", "blue", "pixel"));
+		List<String> item2 = new ArrayList<>(Arrays.asList("computer", "silver", "lenovo"));
+		List<String> item3 = new ArrayList<>(Arrays.asList("phone", "gold", "iphone"));
+		System.out.println(solution.countMatches(Arrays.asList(item1, item2, item3), "type", "phone"));
+
+		// 1832
+		System.out.println("1832. Check if the Sentence Is Pangram");
+		System.out.println("leetcode? " + solution.checkIfPangram("leetcode"));
+		System.out.println("thequickbrownfoxjumpsoverthelazydog? "
+				+ solution.checkIfPangram("thequickbrownfoxjumpsoverthelazydog"));
+
+		// 7
+		System.out.println("7. Reverse Integer");
+		System.out.println(solution.reverse(1534236469));
+		
+		//9 
+		System.out.println("9. Palindrome Number");
+		System.out.println(solution.isPalindrome(131));
 	}
 
 }
