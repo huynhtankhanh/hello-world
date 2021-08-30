@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class Solution {
@@ -302,15 +303,73 @@ public class Solution {
 
 		return stack.isEmpty();
 	}
+	
+	public boolean containsDuplicate(int[] nums) {
+		boolean isContainsDuplicate = false;
+		Set<Integer> set = new HashSet<>();
+		for (int i = 0; i < nums.length; i++) {
+			if (!set.add(nums[i])) {
+				isContainsDuplicate = true;
+				break;
+			}
+		}
+		return isContainsDuplicate;
+	}
+	
+//	public boolean containsNearbyDuplicate(int[] nums, int k) {
+//		List<Integer> list = new ArrayList<>();
+//		for (int i = 0; i < nums.length; i++) {
+//			list.add(nums[i]);
+//			int firstOccurance = list.indexOf(nums[i]);
+//			int lastOccurance = list.lastIndexOf(nums[i]);
+//			if (firstOccurance != lastOccurance && (lastOccurance - firstOccurance) <= k) {
+//				return true;
+//			}
+//			if (lastOccurance - firstOccurance > k) {
+//				// remove first occur
+//				list.remove((Integer) nums[i]);
+//			}
+//		}
+//		return false;
+//	}
+	
+	public boolean containsNearbyDuplicate(int[] nums, int k) {
+		Map<Integer, Integer> map = new HashMap<>();
+		for (int i = 0; i < nums.length; i++) {
+			Integer num = nums[i];
+			if (map.containsKey(num) && Math.abs(i - map.get(num)) <= k) {
+				return true;
+			}
+			map.put(nums[i], i);
+		}
+		return false;
+	}
+	
+	public boolean containsNearbyAlmostDuplicate(int[] nums, int k, int t) {
+		TreeSet<Integer> set = new TreeSet<>();
+		for (int i = 0; i < nums.length; i++) {
+			if (set.floor(nums[i]) != null && set.floor(nums[i]) >= (long) nums[i] - t) {
+				return true;
+			}
+			if (set.ceiling(nums[i]) != null && set.ceiling(nums[i]) <= nums[i] + t) {
+				return true;
+			}
+			set.add(nums[i]);
+			if (i >= k) {
+				set.remove(nums[i - k]);
+			}
+		}
+		return false;
+	}
 
 	public static void main(String[] args) {
 		Solution solution = new Solution();
 
 		// 1108
-		String a = "1.1.1.1";
-		System.out.println("1108. Defanging an IP Address_1: " + a.replace(".", "[.]"));
+		String ip = "1.1.1.1";
+		System.out.println("1108. Defanging an IP Address_1: " + ip.replace(".", "[.]"));
 
-		String[] b = a.split("\\.");
+		String[] b = ip.split("\\.");
 		System.out.println("1108. Defanging an IP Address_2: " + String.join("[.]", b));
 
 		// 1. Two Sum
@@ -383,6 +442,23 @@ public class Solution {
 		System.out.println("20. Valid Parentheses");
 		System.out.println(solution.isValid("([])"));
 		System.out.println(solution.isValid("(]"));
+		
+		// 217
+		System.out.println("217. Contains Duplicate");
+		System.out.println(solution.containsDuplicate(new int[] { 1, 2, 3, 4, 5 }));
+		System.out.println(solution.containsDuplicate(new int[] { 2, 3, 5, 1, 3 }));
+		
+		// 219
+		System.out.println("219. Contains Duplicate II");
+		System.out.println(solution.containsNearbyDuplicate(new int[] { 1, 2, 3, 1}, 3));
+		System.out.println(solution.containsNearbyDuplicate(new int[] { 1, 2, 3, 1, 2, 3 }, 2));
+		System.out.println(solution.containsNearbyDuplicate(new int[] { 1, 0, 1, 1 }, 1));
+		
+		// 220
+		System.out.println("220. Contains Duplicate III");
+		System.out.println(solution.containsNearbyAlmostDuplicate(new int[] { 1, 2, 3, 1}, 3, 0));
+		System.out.println(solution.containsNearbyAlmostDuplicate(new int[] { 1, 0, 1, 1}, 1, 2));
+		System.out.println(solution.containsNearbyAlmostDuplicate(new int[] { 1, 5, 9, 1, 5, 9}, 2, 3));
 	}
 
 }
