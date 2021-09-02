@@ -303,7 +303,7 @@ public class Solution {
 
 		return stack.isEmpty();
 	}
-	
+
 	public boolean containsDuplicate(int[] nums) {
 		boolean isContainsDuplicate = false;
 		Set<Integer> set = new HashSet<>();
@@ -315,7 +315,7 @@ public class Solution {
 		}
 		return isContainsDuplicate;
 	}
-	
+
 //	public boolean containsNearbyDuplicate(int[] nums, int k) {
 //		List<Integer> list = new ArrayList<>();
 //		for (int i = 0; i < nums.length; i++) {
@@ -332,7 +332,7 @@ public class Solution {
 //		}
 //		return false;
 //	}
-	
+
 	public boolean containsNearbyDuplicate(int[] nums, int k) {
 		Map<Integer, Integer> map = new HashMap<>();
 		for (int i = 0; i < nums.length; i++) {
@@ -344,7 +344,7 @@ public class Solution {
 		}
 		return false;
 	}
-	
+
 	public boolean containsNearbyAlmostDuplicate(int[] nums, int k, int t) {
 		TreeSet<Integer> set = new TreeSet<>();
 		for (int i = 0; i < nums.length; i++) {
@@ -362,6 +362,115 @@ public class Solution {
 		return false;
 	}
 
+	public int missingPositiveNumberInArray(int[] A) {
+		Arrays.sort(A);
+		Set<Integer> set = new HashSet<>();
+		for (int i = 0; i < A.length; i++) {
+			if (A[i] > 0) {
+				set.add(A[i]);
+			}
+		}
+
+		int N = A[A.length - 1];
+		// loop up to N + 1, the missing could be NEXT number in arr. Ex [1,2,3,4], the
+		// missing should be 5
+		for (int i = 1; i <= N + 1; i++) {
+			if (!set.contains(i)) {
+				return i;
+			}
+		}
+		return 1;
+	}
+
+	public void bubbleSort(int arr[]) {
+		System.out.println("before==============");
+		printArray(arr);
+		int n = arr.length;
+		for (int i = 0; i < n - 1; i++) {
+			for (int j = 0; j < n - i - 1; j++) {
+				if (arr[j] > arr[j + 1]) {
+					// swap arr[j+1] and arr[j]
+					int temp = arr[j];
+					arr[j] = arr[j + 1];
+					arr[j + 1] = temp;
+				}
+				printArray(arr);
+			}
+		}
+		System.out.println("after=================");
+		printArray(arr);
+	}
+
+	public void printArray(int arr[]) {
+		int n = arr.length;
+		for (int i = 0; i < n; ++i)
+			System.out.print(arr[i] + " ");
+		System.out.println();
+	}
+    
+	public int removeDuplicates(int[] nums) {
+		int count = 1;
+		int i = 0, j = 1;
+		while (j < nums.length) {
+			System.out.println("i: " + i);
+			System.out.println("j: " + j);
+			System.out.println("nums[i]: " + nums[i]);
+			System.out.println("nums[j]: " + nums[j]);
+			System.out.println("=============");
+			
+			if (nums[i] != nums[j]) {
+				System.out.println("count: " + count);
+				nums[count] = nums[j];
+				count++;
+				i = j;
+				j++;
+			} else {
+				j++;
+			}
+		}
+		return count;
+	}
+
+	/**
+	 * FASTEST SOLUTION
+	 * 
+	 * @param arr
+	 * @param k
+	 * @return
+	 */
+	public int findKthPositive(int[] arr, int k) {
+		Arrays.sort(arr);
+		int start = 0;
+		int end = arr.length - 1;
+
+		while (start <= end) {
+			int mid = start + (end - start) / 2;
+			if (arr[mid] - mid - 1 < k) {
+				start = mid + 1;
+			} else {
+				end = mid - 1;
+			}
+		}
+		return start + k;
+	}
+
+//	public int findKthPositive(int[] arr, int k) {
+//		Arrays.sort(arr);
+//		Set<Integer> set = new HashSet<>();
+//		for (int i = 0; i < arr.length; i++) {
+//			set.add(arr[i]);
+//		}
+//
+//		int max = arr[arr.length - 1] + k;
+//		List<Integer> missingNumber = new ArrayList<>();
+//		for (int i = 1; i <= max; i++) {
+//			if (!set.contains(i)) {
+//				missingNumber.add(i);
+//			}
+//		}
+//		return missingNumber.get(k - 1);
+//	}	
+	
 	public static void main(String[] args) {
 		Solution solution = new Solution();
 
@@ -441,24 +550,44 @@ public class Solution {
 		// 20
 		System.out.println("20. Valid Parentheses");
 		System.out.println(solution.isValid("([])"));
-		System.out.println(solution.isValid("(]"));
-		
+//		System.out.println(solution.isValid("(]"));
+
 		// 217
 		System.out.println("217. Contains Duplicate");
 		System.out.println(solution.containsDuplicate(new int[] { 1, 2, 3, 4, 5 }));
 		System.out.println(solution.containsDuplicate(new int[] { 2, 3, 5, 1, 3 }));
-		
+
 		// 219
 		System.out.println("219. Contains Duplicate II");
-		System.out.println(solution.containsNearbyDuplicate(new int[] { 1, 2, 3, 1}, 3));
+		System.out.println(solution.containsNearbyDuplicate(new int[] { 1, 2, 3, 1 }, 3));
 		System.out.println(solution.containsNearbyDuplicate(new int[] { 1, 2, 3, 1, 2, 3 }, 2));
 		System.out.println(solution.containsNearbyDuplicate(new int[] { 1, 0, 1, 1 }, 1));
-		
+
 		// 220
 		System.out.println("220. Contains Duplicate III");
-		System.out.println(solution.containsNearbyAlmostDuplicate(new int[] { 1, 2, 3, 1}, 3, 0));
-		System.out.println(solution.containsNearbyAlmostDuplicate(new int[] { 1, 0, 1, 1}, 1, 2));
-		System.out.println(solution.containsNearbyAlmostDuplicate(new int[] { 1, 5, 9, 1, 5, 9}, 2, 3));
-	}
+		System.out.println(solution.containsNearbyAlmostDuplicate(new int[] { 1, 2, 3, 1 }, 3, 0));
+		System.out.println(solution.containsNearbyAlmostDuplicate(new int[] { 1, 0, 1, 1 }, 1, 2));
+		System.out.println(solution.containsNearbyAlmostDuplicate(new int[] { 1, 5, 9, 1, 5, 9 }, 2, 3));
 
+		System.out.println("MissingPositive number ");
+//		System.out.println(solution.missingPositiveNumber(new int[] { 1, 3, 6, 4, 1, 2 }));
+//		System.out.println(solution.missingPositiveNumberInArray(new int[] { 1, 2, 3, 4, 5 }));
+		System.out.println(solution.missingPositiveNumberInArray(new int[] { 1, 7, 8, 9 }));
+
+		// 1539
+		System.out.println("1539. Kth Missing Positive Number");
+		System.out.println(solution.findKthPositive(new int[] { 1, 4, 3, 2 }, 2));
+		System.out.println(solution.findKthPositive(new int[] { 1, 6, 3, 2 }, 2));
+		System.out.println(solution.findKthPositive(new int[] { 1, 2, 3, 5, }, 2));
+		System.out.println(solution.findKthPositive(new int[] { 1, 3, 5, 7, 9 }, 3));
+
+		// 25
+		System.out.println("26. Remove Duplicates from Sorted Array");
+		System.out.println(solution.removeDuplicates(new int[] { 1, 1, 2, 2, 3, 3, 4 }));
+
+		//bubble sort
+		System.out.println("bubble sort");
+		solution.bubbleSort(new int[] {5,1,3,2,4});
+	}
+	
 }
