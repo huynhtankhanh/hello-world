@@ -394,7 +394,6 @@ public class Solution {
 					arr[j] = arr[j + 1];
 					arr[j + 1] = temp;
 				}
-				printArray(arr);
 			}
 		}
 		System.out.println("after=================");
@@ -483,8 +482,8 @@ public class Solution {
 
 		// 1. Two Sum
 		int[] nums = { 1, 2, 3, 4, 5 };
-		int[] result = solution.twoSum(nums, 8);
-		System.out.println("1. Two sum: " + result.toString());
+		System.out.println("1. Two sum");
+		System.out.println(solution.twoSum(nums, 8).toString());
 
 		// 1342
 		System.out.println("1342. Number of Steps to Reduce a Number to Zero: " + solution.numberOfSteps(14));
@@ -588,6 +587,117 @@ public class Solution {
 		//bubble sort
 		System.out.println("bubble sort");
 		solution.bubbleSort(new int[] {5,1,3,2,4});
+		
+		//oddOccurrencesInArray
+		System.out.println("oddOccurrencesInArray");
+		System.out.println(solution.oddOccurrencesInArray(new int[] { 7, 1, 2, 2, 4, 4, 7 }));
+		
+//		System.out.println(String.format("id=%08.2f", 423.147));
+//		int j = 0;
+//		for (int i = 0; i < 100; i++) {
+//			while (j < 100) {
+//				j++;
+//				System.out.println("j==" + j);
+//				if (j == 10) {
+//					return;
+//				}
+//			}
+//		}
+//		final Set<String> set = new HashSet<>(Arrays.asList("first", "second"));
+//		set.add("third");
+//		System.out.println(set);
+		
+		// 1375
+		System.out.println("1375. Bulb Switcher III");
+		System.out.println(solution.numTimesAllBlue(new int[] { 2, 3, 4, 1, 5 }));
+		System.out.println(solution.numTimesAllBlue(new int[] { 1, 3, 4, 2, 5 }));
+		System.out.println(solution.numTimesAllBlue(new int[] { 2, 5, 4, 1, 3 }));
+		System.out.println(solution.numTimesAllBlue(new int[] { 1, 2, 5, 3, 4 }));
+		
+		List<String> strs = new ArrayList<>();
+		strs.add("c");
+		strs.add("a");
+		strs.add("a");
+		strs.add("b");
+		strs.add("b");
+		
+		Map<String, String> map = strs.stream().collect(Collectors.toMap(i -> i, i -> i, (a1, a2) -> a2));
+		System.out.println(map);
+		Map<String, List<String>> mapStr = strs.stream().collect(Collectors.groupingBy(i -> i));
+		System.out.println(mapStr);
+		String singleEntry = mapStr.entrySet().stream().filter(item -> item.getValue().size() == 1)
+				.findFirst().get().getKey();
+		System.out.println(singleEntry);
+		
+		// 868. Binary Gap
+		System.out.println("868. Binary Gap");
+//		System.out.println(solution.binaryGap(8)); // 1000 -> 0
+//		System.out.println(solution.binaryGap(9)); // 1001 -> 3
+		
+		System.out.println("5^6: "+ (5^6)); // 101 ^ 110 => 011 
+		System.out.println("9^6: " + (9^6)); // 1001 ^ 0110 => 1111= 8 + 4 + 2 + 1
+		System.out.println("8&1: "+ (8&1)); // 1000 & 0001 -> 0000 = 0
+	}
+	
+//    public int binaryGap(int n) {
+//    	String bStr = Integer.toBinaryString(n);
+//    	for (int i = 0; i < bStr.length(); i++) {
+//			String s = bStr.substring(i, i + 1);
+//			System.out.println("Substring: " + s);
+//		}
+//    	
+//        return 0;
+//    }
+    
+	public int binaryGap(int n) {
+		int pos = 1;
+		int lastPos = -1;
+		int distance = 0;
+		while (n > 0) {
+			if ((n & 1) == 1) {
+				if (lastPos != -1) {
+					distance = Math.max(distance, pos - lastPos);
+				}
+				lastPos = pos;
+			}
+			n = n >>> 1;
+			pos++;
+		}
+		return distance;
+	}
+	
+	public static List<String> mergeObject(String a, String b) {
+		List<String> result = new ArrayList<>();
+		result.add(a);
+		result.add(b);
+		return result;
+	}
+	
+	public int numTimesAllBlue(int[] A) {
+		// write your code in Java SE 8
+		int first = 0, next = 0, result = 0;
+		for (int i = 0; i < A.length; i++) {
+			first += A[i];
+			next += i + 1;
+			System.out.println("first: " + first);
+			System.out.println("next: " + next);
+			if (first == next) {
+				result++;
+			}
+		}
+		return result;
+	}
+	
+	public int oddOccurrencesInArray(int[] nums) {
+		int result = nums[0];
+		for (int i = 1; i < nums.length; i++) {
+			System.out.println("OLD result: " + result);
+			System.out.println("nums[i]: " + nums[i]);
+			result = result ^ nums[i];
+			System.out.println("NEW result: " + result);
+			System.out.println("===================");
+		}
+		return result;
 	}
 	
 }
