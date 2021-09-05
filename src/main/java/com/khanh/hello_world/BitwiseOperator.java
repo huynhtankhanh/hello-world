@@ -1,4 +1,4 @@
-package ch.klara.hello_world;
+package com.khanh.hello_world;
 
 public class BitwiseOperator {
 

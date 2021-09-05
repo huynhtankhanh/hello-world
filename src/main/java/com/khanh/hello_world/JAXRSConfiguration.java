@@ -7,7 +7,7 @@
  * shall use it only in accordance with the terms of the license
  * agreement you entered into with AXON IVY AG.
  */
-package ch.klara.hello_world;
+package com.khanh.hello_world;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;

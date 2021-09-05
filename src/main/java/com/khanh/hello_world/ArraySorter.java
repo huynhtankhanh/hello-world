@@ -1,4 +1,4 @@
-package ch.klara.hello_world;
+package com.khanh.hello_world;
 
 import java.util.ArrayList;
 import java.util.Arrays;
