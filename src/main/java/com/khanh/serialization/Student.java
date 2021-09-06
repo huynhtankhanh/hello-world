@@ -1,10 +1,6 @@
 package com.khanh.serialization;
 
-import java.io.DataInputStream;
-import java.io.IOException;
 import java.io.Serializable;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.time.LocalDate;
 
 public class Student implements Serializable {
