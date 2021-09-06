@@ -406,7 +406,7 @@ public class Solution {
 			System.out.print(arr[i] + " ");
 		System.out.println();
 	}
-    
+
 	public int removeDuplicates(int[] nums) {
 		int count = 1;
 		int i = 0, j = 1;
@@ -416,7 +416,7 @@ public class Solution {
 			System.out.println("nums[i]: " + nums[i]);
 			System.out.println("nums[j]: " + nums[j]);
 			System.out.println("=============");
-			
+
 			if (nums[i] != nums[j]) {
 				System.out.println("count: " + count);
 				nums[count] = nums[j];
@@ -469,7 +469,7 @@ public class Solution {
 //		}
 //		return missingNumber.get(k - 1);
 //	}	
-	
+
 	public static void main(String[] args) {
 		Solution solution = new Solution();
 
@@ -584,71 +584,65 @@ public class Solution {
 		System.out.println("26. Remove Duplicates from Sorted Array");
 		System.out.println(solution.removeDuplicates(new int[] { 1, 1, 2, 2, 3, 3, 4 }));
 
-		//bubble sort
+		// bubble sort
 		System.out.println("bubble sort");
-		solution.bubbleSort(new int[] {5,1,3,2,4});
-		
-		//oddOccurrencesInArray
+		solution.bubbleSort(new int[] { 5, 1, 3, 2, 4 });
+
+		// oddOccurrencesInArray
 		System.out.println("oddOccurrencesInArray");
 		System.out.println(solution.oddOccurrencesInArray(new int[] { 7, 1, 2, 2, 4, 4, 7 }));
 		
-//		System.out.println(String.format("id=%08.2f", 423.147));
-//		int j = 0;
-//		for (int i = 0; i < 100; i++) {
-//			while (j < 100) {
-//				j++;
-//				System.out.println("j==" + j);
-//				if (j == 10) {
-//					return;
-//				}
-//			}
-//		}
-//		final Set<String> set = new HashSet<>(Arrays.asList("first", "second"));
-//		set.add("third");
-//		System.out.println(set);
-		
+		System.out.println(String.format("id=%08.2f", 423.147));
+
 		// 1375
 		System.out.println("1375. Bulb Switcher III");
 		System.out.println(solution.numTimesAllBlue(new int[] { 2, 3, 4, 1, 5 }));
 		System.out.println(solution.numTimesAllBlue(new int[] { 1, 3, 4, 2, 5 }));
 		System.out.println(solution.numTimesAllBlue(new int[] { 2, 5, 4, 1, 3 }));
 		System.out.println(solution.numTimesAllBlue(new int[] { 1, 2, 5, 3, 4 }));
-		
+
 		List<String> strs = new ArrayList<>();
 		strs.add("c");
 		strs.add("a");
 		strs.add("a");
 		strs.add("b");
 		strs.add("b");
-		
+
 		Map<String, String> map = strs.stream().collect(Collectors.toMap(i -> i, i -> i, (a1, a2) -> a2));
 		System.out.println(map);
 		Map<String, List<String>> mapStr = strs.stream().collect(Collectors.groupingBy(i -> i));
 		System.out.println(mapStr);
-		String singleEntry = mapStr.entrySet().stream().filter(item -> item.getValue().size() == 1)
-				.findFirst().get().getKey();
+		String singleEntry = mapStr.entrySet().stream().filter(item -> item.getValue().size() == 1).findFirst().get()
+				.getKey();
 		System.out.println(singleEntry);
-		
+
 		// 868. Binary Gap
 		System.out.println("868. Binary Gap");
-//		System.out.println(solution.binaryGap(8)); // 1000 -> 0
-//		System.out.println(solution.binaryGap(9)); // 1001 -> 3
-		
-		System.out.println("5^6: "+ (5^6)); // 101 ^ 110 => 011 
-		System.out.println("9^6: " + (9^6)); // 1001 ^ 0110 => 1111= 8 + 4 + 2 + 1
-		System.out.println("8&1: "+ (8&1)); // 1000 & 0001 -> 0000 = 0
+		System.out.println(solution.binaryGap(8)); // 1000 -> 0
+		System.out.println(solution.binaryGap(9)); // 1001 -> 3
+
+		System.out.println("5^6: " + (5 ^ 6)); // 101 ^ 110 => 011
+		System.out.println("9^6: " + (9 ^ 6)); // 1001 ^ 0110 => 1111= 8 + 4 + 2 + 1
+		System.out.println("8&1: " + (8 & 1)); // 1000 & 0001 -> 0000 = 0
+
+		// 242. Valid Anagram
+		System.out.println("242. Valid Anagram");
+		System.out.println(solution.isAnagram("hello", "olleh"));
 	}
-	
-//    public int binaryGap(int n) {
-//    	String bStr = Integer.toBinaryString(n);
-//    	for (int i = 0; i < bStr.length(); i++) {
-//			String s = bStr.substring(i, i + 1);
-//			System.out.println("Substring: " + s);
-//		}
-//    	
-//        return 0;
-//    }
-    
+
+	public boolean isAnagram(String s, String t) {
+		if (s.length() != t.length()) {
+			return false;
+		}
+
+		char[] c1 = s.toLowerCase().toCharArray();
+		char[] c2 = t.toLowerCase().toCharArray();
+
+		Arrays.sort(c1);
+		Arrays.sort(c2);
+		return Arrays.equals(c1, c2);
+	}
+
 	public int binaryGap(int n) {
 		int pos = 1;
 		int lastPos = -1;
@@ -665,14 +659,14 @@ public class Solution {
 		}
 		return distance;
 	}
-	
+
 	public static List<String> mergeObject(String a, String b) {
 		List<String> result = new ArrayList<>();
 		result.add(a);
 		result.add(b);
 		return result;
 	}
-	
+
 	public int numTimesAllBlue(int[] A) {
 		// write your code in Java SE 8
 		int first = 0, next = 0, result = 0;
@@ -687,7 +681,7 @@ public class Solution {
 		}
 		return result;
 	}
-	
+
 	public int oddOccurrencesInArray(int[] nums) {
 		int result = nums[0];
 		for (int i = 1; i < nums.length; i++) {
@@ -699,5 +693,5 @@ public class Solution {
 		}
 		return result;
 	}
-	
+
 }
