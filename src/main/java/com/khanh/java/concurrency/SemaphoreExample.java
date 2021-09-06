@@ -27,6 +27,9 @@ public class SemaphoreExample {
 
 		service.shutdown();
 		service.awaitTermination(1, TimeUnit.MINUTES);
+		
+		System.out.println("Active thread count: " + java.lang.Thread.activeCount());
+		System.out.println("core: " + Runtime.getRuntime().availableProcessors());
 	}
 
 	static class TaskSemaphore implements Runnable {
