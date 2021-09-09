@@ -26,7 +26,7 @@ public class DeadlockSolved {
 			}
 		};
 
-// Thread-2  
+		// Thread-2
 		Runnable b2 = new Runnable() {
 			public void run() {
 				synchronized (b) {

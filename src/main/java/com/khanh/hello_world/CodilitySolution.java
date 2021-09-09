@@ -88,6 +88,7 @@ public class CodilitySolution {
 		System.out.println(solution.solutionBinaryGap(8)); // 1000 -> 0
 		System.out.println(solution.solutionBinaryGap(33)); // 100001 -> 4
 		System.out.println(solution.solutionBinaryGap(32)); // 100000 -> 0
+		System.out.println(solution.solutionBinaryGap(1)); // 0001 -> 0
 
 		// Jumping frog
 		System.out.println("Jumping frog");
