@@ -591,7 +591,7 @@ public class Solution {
 		// oddOccurrencesInArray
 		System.out.println("oddOccurrencesInArray");
 		System.out.println(solution.oddOccurrencesInArray(new int[] { 7, 1, 2, 2, 4, 4, 7 }));
-		
+
 		System.out.println(String.format("id=%08.2f", 423.147));
 
 		// 1375
@@ -628,7 +628,101 @@ public class Solution {
 		// 242. Valid Anagram
 		System.out.println("242. Valid Anagram");
 		System.out.println(solution.isAnagram("hello", "olleh"));
+
+		// 189. Rotate Array
+		System.out.println("189. Rotate Array");
+		solution.rotate(new int[] { 1, 2, 3, 4, 5, 6, 7 }, 3);
+
+		// 1523. Count Odd Numbers in an Interval Range
+		System.out.println("1523. Count Odd Numbers in an Interval Range");
+		System.out.println(solution.countOdds(8, 10));
 	}
+
+//	public int countOdds(int low, int high) {
+//		int result = 0;
+//		while (low <= high) {
+//			if (low % 2 == 1) {
+//				result++;
+//			}
+//			low++;
+//		}
+//		return result;
+//	}
+
+	public int countOdds(int low, int high) {
+		if (low % 2 == 0 && high % 2 == 0) {
+			return (high - low) / 2;
+		}
+		return (high - low) / 2 + 1;
+	}
+
+	/**
+	 * Rotate to the right with k times
+	 * 
+	 * @param nums
+	 * @param k    Note can change the way rotate from right to left
+	 */
+//    public void rotate(int[] nums, int k) {
+//    	System.out.println(k %= nums.length);
+//    	
+//        for(int i = 0; i < k; i++) {
+//            int j, last;
+//            last = nums[nums.length -1];
+//            for(j=nums.length -1; j > 0; j--) {
+//                nums[j] = nums[j-1];
+//            }
+//            nums[0] = last;
+//        }
+//        System.out.println(Arrays.toString(nums));
+//    }
+
+	public void rotate(int[] nums, int k) {
+		// for cases where k exceeds length of nums
+		k %= nums.length;
+		// 1,2,3,4,5,6,7 -> 7,6,5,4,3,2,1
+		reverse(nums, 0, nums.length - 1);
+
+		// 7,6,5,4,3,2,1 => 5,6,7,4,3,2,1
+		reverse(nums, 0, k - 1);
+
+		// 5,6,7,4,3,2,1 => 5,6,7,1,2,3,4
+		reverse(nums, k, nums.length - 1);
+
+		System.out.println(Arrays.toString(nums));
+	}
+
+//	public void rotate(int[] nums, int k) {
+//		if (nums.length <= k) {
+//			k %= nums.length;
+//		}
+//		int[] clone = Arrays.copyOfRange(nums, 0, nums.length);
+//		
+//		// 1,2,3,4,5,6,7 -> 5,6,7,4,5,6,7
+//		System.arraycopy(clone, clone.length - k, nums, 0, k);
+//		
+//		// 5,6,7,4,5,6,7 => copy 1,2,3,4 from clone to nums from k to nums.length - 1
+//		System.arraycopy(clone, 0, nums, k, clone.length - k);
+//		System.out.println(Arrays.toString(nums));
+//	}
+
+	private static void reverse(int[] nums, int start, int end) {
+		for (int i = start; i < end; i++, end--) {
+			final int temp = nums[i];
+			nums[i] = nums[end];
+			nums[end] = temp;
+		}
+	}
+
+	// both reverse ways are OK
+//    public void reverse(int nums[],int i, int j){
+//        while(i<j){
+//            int temp=nums[i];
+//            nums[i]=nums[j];
+//            nums[j]=temp;
+//            i++;
+//            j--;
+//        }
+//    }  
 
 	public boolean isAnagram(String s, String t) {
 		if (s.length() != t.length()) {

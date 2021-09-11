@@ -24,6 +24,7 @@ public class BitwiseOperator {
 		 */
 		System.out.println("5^6: "+ (5^6)); // 101 ^ 110 => 011 
 		System.out.println("9^6: " + (9^6)); // 1001 ^ 0110 => 1111= 8 + 4 + 2 + 1
+		System.out.println("3^9: " + (3^9)); // 0011 ^ 1001 => 1010= 8 + 0 + 2 + 0 = 10
 		
 		//Bitwise inclusive OR (|) - pipe : It returns 1 if either of the bit is 1, else returns 0.
 		/**
