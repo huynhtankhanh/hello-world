@@ -59,3 +59,59 @@ public class TreeNode {
 		System.out.println("Reverse String = " + reverseStr.toString());
 	}
 }
+
+class Tree {
+	TreeNode root;
+
+	public void addNode(int key) {
+		TreeNode newNode = new TreeNode(key);
+		if (root == null) {
+			root = newNode;
+		} else {
+			// Set root as the Node we will start with as we traverse the tree
+			TreeNode focusNode = root;
+
+			// Future parent for our new Node
+			TreeNode parent;
+			while (true) {
+				parent = focusNode;
+				// Check if the new node should go on the left side of the parent node
+				if (key < parent.val) {
+					focusNode = focusNode.left;
+
+					if (focusNode == null) {
+						parent.left = newNode;
+						return;
+					}
+
+				} else {
+					focusNode = focusNode.right;
+					if (focusNode == null) {
+						parent.right = newNode;
+						return;
+					}
+				}
+			}
+
+		}
+	}
+
+	public TreeNode initTree(int[] arrays) {
+		for (int i = 0; i < arrays.length; i++) {
+			addNode(arrays[i]);
+		}
+
+		return root;
+	}
+	
+	public static void main(String[] args) {
+		Tree tree = new Tree();
+		tree.addNode(3);
+		tree.addNode(6);
+		tree.addNode(2);
+		tree.addNode(5);
+		tree.addNode(9);
+		tree.addNode(-1);
+		tree.addNode(10);
+	}
+}

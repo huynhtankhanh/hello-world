@@ -661,6 +661,36 @@ public class Solution {
 		// 1523. Count Odd Numbers in an Interval Range
 		System.out.println("1523. Count Odd Numbers in an Interval Range");
 		System.out.println(solution.countOdds(8, 10));
+
+		// 104. Maximum Depth of Binary Tree
+		System.out.println("104. Maximum Depth of Binary Tree");
+		Tree tree = new Tree();
+		tree.initTree(new int[] { 3, 6, 2, 5, 9, -1, 10 });
+		int maxDepth = solution.maxDepth(tree.root);
+		System.out.println(maxDepth);
+
+		// 111. Minimum Depth of Binary Tree
+		Tree newTree = new Tree();
+		newTree.initTree(new int[] { 3, 9, 20, -1, 1, 15, 7 });
+		System.out.println("111. Minimum Depth of Binary Tree");
+		int minDepth = solution.minDepth(newTree.root);
+		System.out.println(minDepth);
+	}
+
+	public int maxDepth(TreeNode root) {
+		if (root == null) {
+			return 0;
+		} else {
+			return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
+		}
+	}
+
+	public int minDepth(TreeNode root) {
+		if (root == null) {
+			return 0;
+		} else {
+			return 1 + Math.min(maxDepth(root.left), maxDepth(root.right));
+		}
 	}
 
 //	public int countOdds(int low, int high) {

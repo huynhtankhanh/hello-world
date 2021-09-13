@@ -87,6 +87,14 @@ public class BinaryTree {
 
 	}
 
+	public int maxDepth(Node root) {
+		if (root == null) {
+			return 0;
+		} else {
+			return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
+		}
+	}
+
 	public static void main(String[] args) {
 		/**
 		 * 3 2 6 -1 5 9 10
@@ -109,9 +117,13 @@ public class BinaryTree {
 
 		System.out.println("postOrderTraverseTree=====");
 		theTree.postOrderTraverseTree(theTree.root);
-		
+
 		System.out.println("=====Find node");
 		System.out.println(theTree.findNode(9));
+		
+		System.out.println("Max Depth");
+		int maxDepth = theTree.maxDepth(theTree.root);
+		System.out.println(maxDepth);
 
 	}
 }
@@ -136,7 +148,6 @@ class Node {
 
 //Pre-order Traversal
 //Pre-order traversal is to visit the root first. Then traverse the left subtree. Finally, traverse the right subtree.
-
 
 //In-order Traversal
 //In-order traversal is to traverse the left subtree first. Then visit the root. Finally, traverse the right subtree.
