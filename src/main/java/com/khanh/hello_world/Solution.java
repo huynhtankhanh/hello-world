@@ -24,6 +24,31 @@ public class Solution {
 		return result;
 	}
 
+	public List<Integer> inorderTraversal(TreeNode root) {
+		List<Integer> result = new ArrayList<>();
+		if (root == null) {
+			return result;
+		}
+
+		result.addAll(inorderTraversal(root.left));
+		result.add(root.val);
+		result.addAll(inorderTraversal(root.right));
+
+		return result;
+	}
+
+	public List<Integer> postorderTraversal(TreeNode root) {
+		List<Integer> result = new ArrayList<>();
+		if (root == null) {
+			return result;
+		}
+
+		result.addAll(postorderTraversal(root.left));
+		result.addAll(postorderTraversal(root.right));
+		result.add(root.val);
+		return result;
+	}
+
 	public int[] twoSum(int[] nums, int target) {
 		Map<Integer, Integer> map = new HashMap<>();
 		for (int i = 0; i < nums.length; i++) {
