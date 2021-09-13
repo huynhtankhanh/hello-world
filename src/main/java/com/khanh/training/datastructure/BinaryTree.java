@@ -87,6 +87,88 @@ public class BinaryTree {
 
 	}
 
+	public boolean remove(int key) {
+		Node focusNode = root;
+		Node parent = root;
+		boolean isItALeftChild = true;
+
+		while (focusNode.key != key) {
+			parent = focusNode;
+			if (key < focusNode.key) {
+				isItALeftChild = true;
+				focusNode = focusNode.left;
+			} else {
+				isItALeftChild = false;
+				focusNode = focusNode.right;
+			}
+
+			if (focusNode == null) {
+				return false;
+			}
+		}
+
+		// If Node doesn't have children delete it
+		if (focusNode.left == null && focusNode.right == null) {
+			// If root delete it
+			if (focusNode == root) {
+				root = null;
+			} else if (isItALeftChild) {
+				parent.left = null;
+			} else {
+				parent.right = null;
+			}
+		} else if (focusNode.right == null) { // left is not null, right is null
+			if (focusNode == root) {
+				root = focusNode.right;
+
+				// If focus Node was on the left of parent
+				// move the focus Nodes left child up to the parent node
+			} else if (isItALeftChild) {
+				parent.left = focusNode.right;
+			} else {
+				parent.right = focusNode.right;
+
+			}
+		} else { // both children
+			Node replacement = getReplacementNode(focusNode);
+
+			// If the focusNode is root replace root with the replacement
+			if (focusNode == root) {
+				root = replacement;
+			} else if (isItALeftChild) {
+				parent.left = replacement;
+			} else {
+				parent.right = replacement;
+			}
+			replacement.left = focusNode.left;
+		}
+
+		return true;
+	}
+
+	public Node getReplacementNode(Node replacedNode) {
+		Node replacementParent = replacedNode;
+		Node replacement = replacedNode;
+		Node focusNode = replacedNode.right;
+
+		// While there are no more left children
+		while (focusNode != null) {
+			replacementParent = replacement;
+			replacement = focusNode;
+			focusNode = focusNode.left;
+		}
+
+		// If the replacement isn't the right child
+		// move the replacement into the parents
+		// leftChild slot and move the replaced nodes
+		// right child into the replacements rightChild
+		if (replacement != replacedNode.right) {
+			replacementParent.left = replacement.right;
+			replacement.right = replacedNode.right;
+		}
+		return replacement;
+	}
+
 	public int maxDepth(Node root) {
 		if (root == null) {
 			return 0;
@@ -105,6 +187,7 @@ public class BinaryTree {
 		theTree.addNode(2, "2");
 		theTree.addNode(5, "5");
 		theTree.addNode(9, "9");
+		theTree.addNode(8, "8");
 		theTree.addNode(-1, "-1");
 		theTree.addNode(10, "10");
 		System.out.println(theTree);
@@ -120,11 +203,28 @@ public class BinaryTree {
 
 		System.out.println("=====Find node");
 		System.out.println(theTree.findNode(9));
-		
+
 		System.out.println("Max Depth");
 		int maxDepth = theTree.maxDepth(theTree.root);
 		System.out.println(maxDepth);
-
+		
+		/**
+		 * Original tree
+		 * 				3
+		 * 			2		6
+		 * 		-1		5		9
+		 * 					8		10
+		 * if Remove 6
+		 * 				3
+		 * 			2		8
+		 * 		-1		5		9
+		 * 							10
+		 * => Find replacement node of 6 is the right node of 6 is 9
+		 * if 9 has left node, then replace node is 8
+		 * assign left node of old 6 is 5 to left node of 8
+		 */
+		boolean isRemoved = theTree.remove(6);
+		System.out.println(isRemoved);
 	}
 }
 
