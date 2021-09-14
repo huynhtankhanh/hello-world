@@ -7,9 +7,9 @@ import java.util.List;
 public class Solution {
 	public static void main(String[] args) {
 		Solution solution = new Solution();
-		List<List<Integer>> result = solution.permute(new int[] { 1, 2 });
+		List<List<Integer>> result = solution.permute(new int[] { 1, 2, 3 });
 		System.out.println(result.toString());
-
+		System.out.println("sqrt: " + Math.sqrt(6));
 		solution.testGeneratePermutations();
 	}
 
