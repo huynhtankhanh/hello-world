@@ -39,7 +39,7 @@ public class TapeEquilibrium {
 	 * N is an integer within the range [2..100,000]; each element of array A is an
 	 * integer within the range [minus 1,000..1,000].
 	 */
-	public int solution(int[] A) {
+	public int solution(int[] A) { // 84%
 		int sum = 0;
 		for (int i = 0; i < A.length; i++) {
 			sum += A[i];
@@ -56,6 +56,27 @@ public class TapeEquilibrium {
 				tape = -tape;
 			}
 			minTape = Math.min(minTape, tape);
+		}
+		return minTape;
+	}
+
+	// 100%
+	public int solution1(int[] A) {
+		int sumRight = 0;
+		for (int i = 0; i < A.length; i++) {
+			sumRight += A[i];
+		}
+
+		int minTape = Integer.MAX_VALUE;
+		int sumLeft = 0;
+		for (int i = 0; i < A.length - 1; i++) {
+			sumRight -= A[i];
+			sumLeft += A[i];
+			int tape = sumLeft - sumRight;
+			if (tape < 0) {
+				tape = -tape;
+			}
+			minTape = Math.min(tape, minTape);
 		}
 		return minTape;
 	}
