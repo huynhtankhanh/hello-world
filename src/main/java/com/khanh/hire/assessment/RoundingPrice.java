@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Arrays;
 
-import com.khanh.leetcode.Solution;
-
 public class RoundingPrice {
 	public static long[] solution(double[] prices) {
 		long[] result = new long[prices.length];
@@ -30,7 +28,7 @@ public class RoundingPrice {
 	}
 
 	public static void main(String[] args) {
-		long[] a = Solution.solution(new double[] { 5.4d, 3.3d, 5d });
+		long[] a = RoundingPrice.solution(new double[] { 5.4d, 3.3d, 5d });
 		System.out.println(Arrays.toString(a));
 	}
 }
