@@ -88,7 +88,7 @@ public class GenomicRangeQuery {
 		map.put('T', 4);
 
 		String subString = s.substring(beginIndex, endIndex + 1);
-		int minImpact = Integer.MAX_VALUE;
+		int minImpact = 5;
 		for (int i = 0; i < subString.length(); i++) {
 			minImpact = Math.min(minImpact, map.getOrDefault(subString.charAt(i), Integer.MAX_VALUE));
 		}
