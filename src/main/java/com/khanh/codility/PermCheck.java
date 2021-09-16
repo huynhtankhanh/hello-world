@@ -4,6 +4,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class PermCheck {
+	/**
+	 * https://app.codility.com/programmers/lessons/4-counting_elements/perm_check/
+	 * 
+	 * @param A
+	 * @return
+	 */
+	// 100%
 	public static int solution(int[] A) {
 		int max = 0;
 		Set<Integer> set = new HashSet<>();

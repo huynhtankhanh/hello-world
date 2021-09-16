@@ -124,7 +124,7 @@ public class BinaryTree {
 				// If focus Node was on the left of parent
 				// move the focus Nodes left child up to the parent node
 			} else if (isItALeftChild) {
-				parent.left = focusNode.right;
+				parent.left = focusNode.left;
 			} else {
 				parent.right = focusNode.right;
 
@@ -183,13 +183,18 @@ public class BinaryTree {
 		 */
 		BinaryTree theTree = new BinaryTree();
 		theTree.addNode(3, "root");
-		theTree.addNode(6, "6");
-		theTree.addNode(2, "2");
+		theTree.addNode(4, "4");
 		theTree.addNode(5, "5");
-		theTree.addNode(9, "9");
+		theTree.addNode(6, "6");
+		theTree.addNode(7, "7");
 		theTree.addNode(8, "8");
-		theTree.addNode(-1, "-1");
-		theTree.addNode(10, "10");
+//		theTree.addNode(6, "6");
+//		theTree.addNode(2, "2");
+//		theTree.addNode(5, "5");
+//		theTree.addNode(9, "9");
+//		theTree.addNode(8, "8");
+//		theTree.addNode(-1, "-1");
+//		theTree.addNode(10, "10");
 		System.out.println(theTree);
 
 		System.out.println("inOrderTraverseTree=====");

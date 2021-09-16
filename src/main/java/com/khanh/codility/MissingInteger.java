@@ -12,6 +12,7 @@ public class MissingInteger {
 	 * @param A
 	 * @return
 	 */
+	// 100%
 	public int solution(int[] A) {
 		Arrays.sort(A);
 		Set<Integer> set = new HashSet<>();
