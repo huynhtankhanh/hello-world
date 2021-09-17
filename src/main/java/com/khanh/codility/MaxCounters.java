@@ -11,6 +11,7 @@ public class MaxCounters {
 	 * @param A
 	 * @return
 	 */
+	//77%
 	public int[] solution(int N, int[] A) { // TODO
 		int[] counters = new int[N];
 		int maxValue = 0;
