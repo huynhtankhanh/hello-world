@@ -31,7 +31,7 @@ public class GenomicRangeQuery {
 		int[][] counters = new int[4][S.length() + 1];
 		int a = 0, c = 0, g = 0, t = 0;
 
-		// create 2d array to store how many time the A,C,G or T present in S
+		// create 2d array to store how many time the A, C, G or T present in S
 		// counters[0][i] => A
 		// counters[1][i] => C
 		// counters[2][i] => G
@@ -54,7 +54,7 @@ public class GenomicRangeQuery {
 			counters[2][i + 1] = g;
 			counters[3][i + 1] = t;
 		}
-		// If S=CAGCCTA then counters[][] is
+		// If S= CAGCCTA then counters[][] is
 		// for A [0, 0, 1, 1, 1, 1, 1, 2]
 		// for C [0, 1, 1, 1, 2, 3, 3, 3]
 		// for G [0, 0, 0, 1, 1, 1, 1, 1]

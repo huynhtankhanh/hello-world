@@ -20,7 +20,7 @@ public class CountNonDivisible {
 
 		// map tracking how many items that a number can divide in array, if having
 		// duplicated divisor numbers in array -> increase that count with duplicated
-		// number Ex: [3,1,2,3,6] having 3 time of 3, 6 have 5 as divisor count
+		// number Ex: [3, 1, 2, 3, 6] having 3 time of 3, 6 have 5 as divisor count
 		Map<Integer, Integer> divisorCounts = new HashMap<Integer, Integer>();
 		for (int n : count.keySet()) {
 			int divisorCount = 0;
