@@ -79,7 +79,7 @@ public class EquiLeader {
 		}
 
 		// if no leader, then return 0
-		if (leaderCount <= A.length / 2) {
+		if (leaderCount == 0 || leaderCount <= A.length / 2) {
 			return 0;
 		}
 
