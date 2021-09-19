@@ -1,4 +1,4 @@
-package com.khanh.codility;
+package com.khanh.codility.arrays;
 
 public class OddOccurrencesInArray {
 

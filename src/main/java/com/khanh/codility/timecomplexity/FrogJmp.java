@@ -1,4 +1,4 @@
-package com.khanh.codility;
+package com.khanh.codility.timecomplexity;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

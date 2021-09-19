@@ -1,4 +1,4 @@
-package com.khanh.codility;
+package com.khanh.codility.prefixsums;
 
 import java.util.Arrays;
 import java.util.HashMap;

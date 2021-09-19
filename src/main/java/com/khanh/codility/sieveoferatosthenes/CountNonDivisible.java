@@ -1,4 +1,4 @@
-package com.khanh.codility;
+package com.khanh.codility.sieveoferatosthenes;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -46,7 +46,6 @@ public class CountNonDivisible {
 			nonDivisors[i] = A.length - divisorCounts.get(A[i]);
 		}
 		return nonDivisors;
-
 	}
 
 	public static void main(String[] args) {

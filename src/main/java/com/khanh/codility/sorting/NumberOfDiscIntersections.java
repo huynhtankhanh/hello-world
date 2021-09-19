@@ -17,7 +17,7 @@ public class NumberOfDiscIntersections {
 		int intersection = 0;
 		for (int i = 0; i < starts.length; i++) {
 			if (starts[i] > 0) {
-				intersection += (starts[i] + i);
+				intersection += (starts[i]);
 			}
 		}
 

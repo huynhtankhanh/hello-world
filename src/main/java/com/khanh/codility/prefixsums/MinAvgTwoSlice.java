@@ -1,4 +1,4 @@
-package com.khanh.codility;
+package com.khanh.codility.prefixsums;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

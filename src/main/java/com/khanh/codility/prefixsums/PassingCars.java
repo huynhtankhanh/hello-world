@@ -1,4 +1,4 @@
-package com.khanh.codility;
+package com.khanh.codility.prefixsums;
 
 public class PassingCars {
 	/**

@@ -1,4 +1,4 @@
-package com.khanh.codility;
+package com.khanh.codility.countingelements;
 
 import java.util.HashSet;
 import java.util.Set;
