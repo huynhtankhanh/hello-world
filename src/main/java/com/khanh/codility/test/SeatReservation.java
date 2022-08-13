@@ -33,9 +33,9 @@ public class SeatReservation {
 			}
 			mapRowIndexAndReservedSeats.put(i, seatAndReserved);
 		}
-		System.out.println("Map row index before reservation : " + mapRowIndexAndReservedSeats);
-		System.out.println("Map isle seat : " + mapIsleSeats);
-		System.out.println("Map adjecent seat : " + mapAdjacentSeats);
+		System.out.println("Row index: " + mapRowIndexAndReservedSeats);
+		System.out.println("Isle seats: " + mapIsleSeats);
+		System.out.println("Adjecent seats: " + mapAdjacentSeats);
 
 		// depend on reserved seat, put reserved flag
 		String[] reservedSeats = S.split(" ");
@@ -53,7 +53,7 @@ public class SeatReservation {
 		int result = 0;
 		for (Map.Entry<Integer, Map<String, Boolean>> entry : mapRowIndexAndReservedSeats.entrySet()) {
 			Map<String, Boolean> rowOfSeatAndReservation = entry.getValue();
-			System.out.println("Row of map reserved: " + rowOfSeatAndReservation);
+			System.out.println("Row of map with reserved flag: " + rowOfSeatAndReservation);
 			int consecutiveAdjacentSeat = 0;
 			for (Map.Entry<String, Boolean> e : rowOfSeatAndReservation.entrySet()) {
 				if (e.getValue() || !mapAdjacentSeats.containsKey(e.getKey())) {
