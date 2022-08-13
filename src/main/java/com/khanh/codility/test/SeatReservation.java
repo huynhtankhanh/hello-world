@@ -8,7 +8,7 @@ import java.util.Map;
 public class SeatReservation {
 	private static final String seatSigns = "ABCDEFGHJK";
 	private static final List<Integer> isleSeatIndexs = Arrays.asList(2, 3, 6, 7); // 001 1001 100
-	private static final List<Integer> adjacentSeatIndexs = Arrays.asList(1, 2, 3, 4, 5, 6); // 011 1111 000
+	private static final List<Integer> adjacentSeatIndexs = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8); // 011 1111 110
 
 	public static int solution(int N, String S) {
 		if (N == 1 && "".equals(S.trim())) {
@@ -73,7 +73,7 @@ public class SeatReservation {
 
 	public static void main(String[] args) {
 		System.out.println(SeatReservation.solution(1, "1A 1C"));
-		System.out.println(SeatReservation.solution(2, "1A 2F 1C"));
+		System.out.println(SeatReservation.solution(2, "1A 2F 2C 1C"));
 //		System.out.println(SeatReservation.solution(40, "1A 1D 1E 3C 2B 40G 5A"));
 	}
 }
