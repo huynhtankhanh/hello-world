@@ -39,23 +39,20 @@ public class CinemaSeatAllocation {
 			seats.put(seat[0], groups);
 		}
 
-		int availableSlots = 2 * n;
+		int result = 0;
 		for (int[] groups : seats.values()) {
 			int taken = groups[0] + groups[2];
-			if (taken == 2) {
-				if (groups[1] == 0) {
-					availableSlots--;
-				} else {
-					availableSlots -= 2;
-				}
-			}
-			if (taken == 1) {
-				availableSlots--;
+			if (taken == 2 && groups[1] == 0) {
+				result++;
+			} else if (taken == 1) {
+				result++;
+			} else {
+				result += 2;
 			}
 
 		}
 
-		return availableSlots;
+		return result;
 	}
 
 	public static void main(String[] args) {
