@@ -1,6 +1,5 @@
 package com.khanh.codility.test;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
