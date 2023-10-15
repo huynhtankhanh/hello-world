@@ -21,7 +21,7 @@ public class MissingInteger {
 		}
 
 		int max = A[A.length - 1];
-		for (int i = 1; i <= max + 1; i++) {
+		for (int i = 1; i <= max+1; i++) {
 			if (!set.contains(i)) {
 				return i;
 			}
@@ -32,7 +32,7 @@ public class MissingInteger {
 
 	public static void main(String[] args) {
 		MissingInteger m = new MissingInteger();
-		int result = m.solution(new int[] { 1, 3, 6, 4, 1, 2 });
+		int result = m.solution(new int[] {-1, 1, 3, 5, 4, 1, 2 });
 		System.out.println(result);
 	}
 }
